@@ -1,24 +1,34 @@
 package data
 
-import "time"
+import (
+	"encoding/json"
+	"io"
+	"time"
+)
 
 // Product è la Struttura che definisce l'oggetto di BO
 type Product struct {
-	ID          int
-	Name        string
-	Description string
-	Price       float32
-	SKU         string
-	CreatedOn   string
-	UpdatedOn   string
-	DeletedOn   string
+	ID          int     `json:"id"`
+	Name        string  `json:"name"`
+	Description string  `json:"description"`
+	Price       float32 `json:"price"`
+	SKU         string  `json:"sku"`
+	CreatedOn   string  `json:"-"`
+	UpdatedOn   string  `json:"-"`
+	DeletedOn   string  `json:"-"`
 }
 
 // Products is a collection of Product
 type Products []*Product
 
+// ToJSON funzione
+func (p *Products) ToJSON(w io.Writer) error {
+	e := json.NewEncoder(w)
+	return e.Encode(p)
+}
+
 // GetProducts returns a list of products
-func GetProducts() []*Product {
+func GetProducts() Products {
 	return productList
 }
 
