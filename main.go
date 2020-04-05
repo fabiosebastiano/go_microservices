@@ -1,9 +1,16 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"os"
 )
 
 func main() {
-	fmt.Println("TEST")
+
+	l := log.New(os.Stdout, "products-api ", log.LstdFlags)
+
+	ph := handlers
+
+
+	l.Println("Server startato su porta 9090")
 }
